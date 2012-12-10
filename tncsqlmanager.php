@@ -10,8 +10,8 @@
  *
  * @author Tanju Yildiz <yildiz.tanju@gmail.com>
  * @file tncsqlmanager.php
- * @version 0.1
- * @date 02:04 10.12.2012
+ * @version 0.2
+ * @date 02:47 10.12.2012
  */
 
 class tncSQLManager {
@@ -32,10 +32,10 @@ class tncSQLManager {
 	 */
 	function __construct() {
 		try {
-        	$this->connection = mysql_connect($this->dbHost, $this->dbUser, $this->dbPass);
+			$this->connection = mysql_connect($this->dbHost, $this->dbUser, $this->dbPass);
 			mysql_select_db($this->dbName, $this->connection);
 			if ( !$this->connection ) {
-            	throw new Exception('MySQL Database Error: '.mysql_error());
+				throw new Exception('MySQL Database Error: '.mysql_error());
 			} else {
 				return true;
 			}
@@ -52,22 +52,31 @@ class tncSQLManager {
 	 * @return
 	 */
 	public function query($sql) {
-    	if ( $this->debug === false) {
-    		try {
-    			$result = mysql_query($sql);
+		if ( $this->debug === false) {
+			try {
+				$result = mysql_query($sql);
 				if ( $result === false ) {
 					throw new Exception('MySQL Query Error: '.mysql_error());
 				}
 				return $result;
-    		} catch(Exception $e) {
-    			printf('ERROR %s', $e->getMessage());
+			} catch(Exception $e) {
+				printf('ERROR %s', $e->getMessage());
 				exit();
-    		}
-    	} else {
-    		printf('<pre>%s</pre>', $sql);
-    	}
+			}
+		} else {
+			printf('<pre>%s</pre>', $sql);
+		}
 	}
-
-}
-
+	
+	/**
+	 * tncSQLManager::fetchArray()
+	 * @param mixed $result
+	 * @access public
+	 * @return array $array
+	 */
+	public function fetchArray($result) {
+		$$array = mysql_fetch_array($result, MYSQL_ASSOC);
+		return $array;
+	}
+} // end of class
 ?>
