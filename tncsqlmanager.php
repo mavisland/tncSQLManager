@@ -10,8 +10,8 @@
  *
  * @author Tanju Yildiz <yildiz.tanju@gmail.com>
  * @file tncsqlmanager.php
- * @version 0.6
- * @date 03:35 10.12.2012
+ * @version 0.7
+ * @date 03:39 10.12.2012
  */
 
 class tncSQLManager {
@@ -141,6 +141,18 @@ class tncSQLManager {
 		$fields    = $this->implodeArray($data, ', ');
 		$condition = $this->implodeArray($where, ' AND ');
 		$query     = sprintf('UPDATE %s SET %s WHERE %s', $table, $fields, $condition);
+		return $this->query($query);
+	}
+	
+	/**
+	 * tncSQLManager::queryDelete()
+	 * @access public
+	 * @param $table, array $where
+	 * $return
+	 */
+	public function queryDelete($table, $where = array()) {
+		$condition = $this->implodeArray($where, ' AND ');
+		$query     = sprintf('DELETE FROM %s WHERE %s', $table, $condition);
 		return $this->query($query);
 	}
 	
