@@ -10,8 +10,8 @@
  *
  * @author Tanju Yildiz <yildiz.tanju@gmail.com>
  * @file tncsqlmanager.php
- * @version 0.5
- * @date 03:25 10.12.2012
+ * @version 0.6
+ * @date 03:35 10.12.2012
  */
 
 class tncSQLManager {
@@ -128,6 +128,19 @@ class tncSQLManager {
 		$fields = implode(', ', array_keys($data));
 		$values = implode('", "', array_map('mysql_real_escape_string', $data));
 		$query  = sprintf('INSERT INTO %s (%s) VALUES ("%s")', $table, $fields, $values);
+		return $this->query($query);
+	}
+	
+	/**
+	 * tncSQLManager::queryUpdate()
+	 * @access public
+	 * @param $table, array $data, array $where
+	 * $return 
+	 */
+	public function queryUpdate($table, $data = array(), $where = array()) {
+		$fields    = $this->implodeArray($data, ', ');
+		$condition = $this->implodeArray($where, ' AND ');
+		$query     = sprintf('UPDATE %s SET %s WHERE %s', $table, $fields, $condition);
 		return $this->query($query);
 	}
 	
