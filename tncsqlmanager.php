@@ -17,32 +17,33 @@
 class tncSQLManager {
 	
 	// Connection Variables
-	private $dbHost = '';
-	private $dbUser = '';
-	private $dbPass = '';
-	private $dbName = '';
+	private $dbHost = 'localhost';
+	private $dbUser = 'root';
+	private $dbPass = '12345678';
+	private $dbName = 'world';
 	
 	// General Variables
-	private $debug = false;
+	private $debug = true;
 	public $connection;
 	
 	/**
 	 * tncSQLManager::__construct()
+	 * @access public
 	 * @return
 	 */
-	function __construct() {
+	public function __construct() {
 		try {
-			$this->connection = mysql_connect($this->dbHost, $this->dbUser, $this->dbPass);
-			mysql_select_db($this->dbName, $this->connection);
-			if ( !$this->connection ) {
-				throw new Exception('MySQL Database Error: '.mysql_error());
-			} else {
-				return true;
-			}
-		} catch(Exception $e) {
-			printf('ERROR %s', $e->getMessage());
-			exit();
-		}
+ 			$this->connection = mysql_connect($this->dbHost, $this->dbUser, $this->dbPass);
+ 			mysql_select_db($this->dbName, $this->connection);
+ 			if (!$this->connection) {
+ 				throw new Exception('MySQL Database Error: ' . mysql_error());
+ 			} else {
+ 				return true;
+ 			}
+ 		} catch (Exception $e) {
+ 			printf('ERROR: %s', $e->getMessage());
+ 			exit();
+ 		}
 	}
 	
 	/**
@@ -56,20 +57,20 @@ class tncSQLManager {
 	
 	/**
 	 * tncSQLManager::query()
-	 * @param mixed $sql
 	 * @access public
+	 * @param mixed $sql 
 	 * @return
 	 */
 	public function query($sql) {
-		if ( $this->debug === false) {
+		if ($this->debug === false) {
 			try {
 				$result = mysql_query($sql);
-				if ( $result === false ) {
-					throw new Exception('MySQL Query Error: '.mysql_error());
+				if ($result === false) {
+					throw new Exception('MySQL Query Error: ' . mysql_error());
 				}
 				return $result;
-			} catch(Exception $e) {
-				printf('ERROR %s', $e->getMessage());
+			} catch (Exception $e) {
+				printf('ERROR: %s', $e->getMessage());
 				exit();
 			}
 		} else {
@@ -79,13 +80,13 @@ class tncSQLManager {
 	
 	/**
 	 * tncSQLManager::fetchArray()
-	 * @param mixed $result
 	 * @access public
-	 * @return array $array
+	 * @param mixed $result
+	 * @return array $row
 	 */
 	public function fetchArray($result) {
-		$$array = mysql_fetch_array($result, MYSQL_ASSOC);
-		return $array;
+		$row = mysql_fetch_array($result, MYSQL_ASSOC);
+		return $row;
 	}
 	
 	/**
