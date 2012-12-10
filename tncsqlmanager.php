@@ -10,7 +10,7 @@
  *
  * @author Tanju Yildiz <yildiz.tanju@gmail.com>
  * @file tncsqlmanager.php
- * @version 0.2
+ * @version 0.3
  * @date 02:47 10.12.2012
  */
 
@@ -78,5 +78,16 @@ class tncSQLManager {
 		$$array = mysql_fetch_array($result, MYSQL_ASSOC);
 		return $array;
 	}
+	
+	/**
+	 * tncSQLManager::numRows()
+	 * @param mixed $result
+	 * @access public
+	 * @return 
+	 */
+	public function numRows($result) {
+		return mysql_num_rows($result);
+	}
+	
 } // end of class
 ?>
