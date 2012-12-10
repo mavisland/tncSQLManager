@@ -1,19 +1,5 @@
 <?php
 
-/**
- * tncSQLManager
- * Simple MySQL Query Manager for PHP
- * This class can compose and execute MySQL queries from parameters.
- * It can take parameters that define tables, field names, field values,
- * and conditions to compose INSERT, UPDATE and DELETE queries on a
- * given MySQL database.
- *
- * @author Tanju Yildiz <yildiz.tanju@gmail.com>
- * @file example.php
- * @version 0.7
- * @date 03:41 10.12.2012
- */
-
 include('tncsqlmanager.php');
 $test = new tncSQLManager();
 $test->query("SET NAMES UTF8");

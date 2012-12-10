@@ -10,8 +10,8 @@
  *
  * @author Tanju Yildiz <yildiz.tanju@gmail.com>
  * @file tncsqlmanager.php
- * @version 0.7
- * @date 03:39 10.12.2012
+ * @version 1.0
+ * @date 05:30 10.12.2012
  */
 
 class tncSQLManager {
@@ -23,7 +23,7 @@ class tncSQLManager {
 	private $dbName = 'world';
 	
 	// General Variables
-	private $debug = true;
+	private $debug = false;
 	public $connection;
 	
 	/**
@@ -31,7 +31,7 @@ class tncSQLManager {
 	 * @access public
 	 * @return
 	 */
-	public function __construct() {
+	function __construct() {
 		try {
  			$this->connection = mysql_connect($this->dbHost, $this->dbUser, $this->dbPass);
  			mysql_select_db($this->dbName, $this->connection);
@@ -47,11 +47,11 @@ class tncSQLManager {
 	}
 	
 	/**
-	 * tncSQLManager::__destruct()
+	 * tncSQLManager::close()
 	 * @access public
 	 * @return
 	 */
-	public function __destruct() {
+	public function close() {
 		return mysql_close($this->connection);
 	}
 	
