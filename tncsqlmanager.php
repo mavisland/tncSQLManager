@@ -26,6 +26,24 @@ class tncSQLManager {
 	private $debug = false;
 	public $connection;
 	
+	/**
+	 * tncSQLManager::__construct()
+	 * @return
+	 */
+	function __construct() {
+		try {
+        	$this->connection = mysql_connect($this->dbHost, $this->dbUser, $this->dbPass);
+			mysql_select_db($this->dbName, $this->connection);
+			if ( !$this->connection ) {
+            	throw new Exception('MySQL Database Error: '.mysql_error());
+			} else {
+				return true;
+			}
+		} catch(Exception $e) {
+			printf('ERROR %s', $e->getMessage());
+			exit();
+		}
+	}
 }
 
 ?>
