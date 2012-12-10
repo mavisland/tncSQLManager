@@ -17,7 +17,7 @@
 include('tncsqlmanager.php');
 
 $test  = new tncSQLManager();
-$result = $test->query('SELECT * FROM city ORDER BY ID DESC');
+$result = $test->query('SELECT * FROM city LIMIT 0,10');
 
 echo '
 <table align="center" width="800px" cellpadding="3" cellspacing="1">
