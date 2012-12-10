@@ -44,6 +44,30 @@ class tncSQLManager {
 			exit();
 		}
 	}
+
+	/**
+	 * tncSQLManager::query()
+	 * @param mixed $sql
+	 * @access public
+	 * @return
+	 */
+	public function query($sql) {
+    	if ( $this->debug === false) {
+    		try {
+    			$result = mysql_query($sql);
+				if ( $result === false ) {
+					throw new Exception('MySQL Query Error: '.mysql_error());
+				}
+				return $result;
+    		} catch(Exception $e) {
+    			printf('ERROR %s', $e->getMessage());
+				exit();
+    		}
+    	} else {
+    		printf('<pre>%s</pre>', $sql);
+    	}
+	}
+
 }
 
 ?>
