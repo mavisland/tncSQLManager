@@ -10,7 +10,7 @@
  *
  * @author Tanju Yildiz <yildiz.tanju@gmail.com>
  * @file tncsqlmanager.php
- * @version 0.3
+ * @version 0.4
  * @date 02:47 10.12.2012
  */
 
@@ -96,6 +96,19 @@ class tncSQLManager {
 	 */
 	public function numRows($result) {
 		return mysql_num_rows($result);
+	}
+	
+	/**
+	 * tncSQLManager::queryInsert()
+	 * @access public
+	 * @param
+	 * @return
+	 */
+	public function queryInsert($table, $data = array()) {
+		$fields = implode(', ', array_keys($data));
+		$values = implode('", "', array_map('mysql_real_escape_string', $data));
+		$query  = sprintf('INSERT INTO %s (%s) VALUES ("%s")', $table, $fields, $values);
+		return $this->query($query);
 	}
 	
 } // end of class
