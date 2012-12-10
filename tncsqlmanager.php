@@ -10,8 +10,8 @@
  *
  * @author Tanju Yildiz <yildiz.tanju@gmail.com>
  * @file tncsqlmanager.php
- * @version 0.4
- * @date 02:47 10.12.2012
+ * @version 0.5
+ * @date 03:25 10.12.2012
  */
 
 class tncSQLManager {
@@ -99,9 +99,29 @@ class tncSQLManager {
 	}
 	
 	/**
+	 * tncSQLManager::implodeArray()
+	 * @access private
+	 * @param array $data, $seperated
+	 * @return string $string
+	 */
+	private function implodeArray($data = array(), $seperated) {
+		$fields = array_keys($data);
+		$values = array_values(array_map('mysql_real_escape_string', $data));
+		$i = 0;
+		while($fields[$i]) {
+			if ($i > 0) {
+				$string .= $seperated;
+			}
+			$string .= sprintf("%s = '%s'", $fields[$i], $values[$i]);
+			$i++;
+		}
+		return $string;
+	}
+	
+	/**
 	 * tncSQLManager::queryInsert()
 	 * @access public
-	 * @param
+	 * @param $table, array $data
 	 * @return
 	 */
 	public function queryInsert($table, $data = array()) {
