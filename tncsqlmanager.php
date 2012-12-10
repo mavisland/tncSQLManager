@@ -44,7 +44,16 @@ class tncSQLManager {
 			exit();
 		}
 	}
-
+	
+	/**
+	 * tncSQLManager::__destruct()
+	 * @access public
+	 * @return
+	 */
+	public function __destruct() {
+		return mysql_close($this->connection);
+	}
+	
 	/**
 	 * tncSQLManager::query()
 	 * @param mixed $sql
