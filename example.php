@@ -16,7 +16,7 @@
 
 include('tncsqlmanager.php');
 
-$test  = new tncSQLManager();
+$test  = new SQLManager();
 $result = $test->query('SELECT * FROM city LIMIT 0,10');
 
 echo '

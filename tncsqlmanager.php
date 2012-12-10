@@ -20,7 +20,7 @@ class tncSQLManager {
 	private $dbHost = 'localhost';
 	private $dbUser = 'root';
 	private $dbPass = '12345678';
-	private $dbName = 'world';
+	private $dbName = 'kaletekcan';
 	
 	// General Variables
 	private $debug = true;
@@ -35,8 +35,8 @@ class tncSQLManager {
 		try {
  			$this->connection = mysql_connect($this->dbHost, $this->dbUser, $this->dbPass);
  			mysql_select_db($this->dbName, $this->connection);
- 			if (!$this->connection) {
- 				throw new Exception('MySQL Database Error: ' . mysql_error());
+ 			if (! $this->connection) {
+ 				throw new Exception('MySQL Connection Database Error: ' . mysql_error());
  			} else {
  				return true;
  			}
