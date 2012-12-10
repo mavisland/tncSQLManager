@@ -20,7 +20,7 @@ class tncSQLManager {
 	private $dbHost = 'localhost';
 	private $dbUser = 'root';
 	private $dbPass = '12345678';
-	private $dbName = 'kaletekcan';
+	private $dbName = 'world';
 	
 	// General Variables
 	private $debug = true;

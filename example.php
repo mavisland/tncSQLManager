@@ -15,9 +15,9 @@
  */
 
 include('tncsqlmanager.php');
-
-$test  = new SQLManager();
-$result = $test->query('SELECT * FROM city LIMIT 0,10');
+$test = new tncSQLManager();
+$test->query("SET NAMES UTF8");
+$result = $test->query("SELECT * FROM city LIMIT 0,10");
 
 echo '
 <table align="center" width="800px" cellpadding="3" cellspacing="1">
@@ -28,7 +28,7 @@ echo '
 		<th>District</th>
 		<th>Population</th>
 	</tr>';
-while($row = $test->fetchArray($result) or die(mysql_error())) {
+while($row = $test->fetchArray($result)) {
 	echo '
 	<tr>
 		<td>'.$row["ID"].'</td>
